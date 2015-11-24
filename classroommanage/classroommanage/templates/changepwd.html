@@ -1,7 +1,7 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 <head>
-<title>登陆</title>
+<title>Contact</title>
 <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -67,47 +67,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<!-- script-for-nav --> 
 					</div>
 					<div class="header-right1">
-						<li><a href="/login/">登陆</a></li>
-						<li><a href="/register/">注册</a></li>
+						{% if isin%}
+							<li><a href="/updateinform/">{{ name }}</a></li>
+							<li><a href="/changepw/">修改密码</a></li>
+							<li><a href="/logout/">注销</a></li>
+						{% else %}
+							<li><a href="/login/">登录</a></li>
+							<li><a href="/register/">注册</a></li>
+						{% endif %}
 					</div>
 					<div class="clearfix"> </div>
 				</div>
 			</div>
 	</div>
 <!-- header -->
-<!-- login -->
-	<div class="login-page">
-		<div class="container">
-			<div class="account_grid">
-				<div class="col-md-6 login-left wow fadeInLeft" data-wow-delay="0.4s">
-					<h3>新用户</h3>
-					<p>创建一个新账户, 你将可以预约教室</p>
-					<a class="acount-btn" href="/register/">新建账户</a>
-			   </div>
-			   <div class="col-md-6 login-right wow fadeInRight" data-wow-delay="0.4s">
-					<h3>已注册</h3>
-					<p>如果已有账户，请登陆</p>
-					<form action="" method="post">
-						{% csrf_token %}
-						<div>
-							<span>用户名<label>*</label></span>
-							<input type="text" name="username" value="" id="username">
-						</div>
-						<div>
-							<span>密码<label>*</label></span>
-							<input type="password" name="password" value="" id="password"> 
-						</div>
-						<a class="forgot" href="#">忘记密码?</a>
-						<input type="submit" value="登陆">
-					</form>
-			   </div>	
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
-<!-- login -->
-
-
+    <h2>修改密码</h2>
+    
+    {% if oldpassword_is_wrong %}
+        <div>
+            <h4>错误!</h4>原密码不正确
+        </div>
+    {% endif %}
+    <div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <table> {{ form }} </table>
+            <p>
+                <input type="submit" value="确认修改">
+            </p>
+        </form>
+    </div>
 <!-- footer-top -->
 <div class="footer-top">
 	<div class="container">
@@ -139,7 +128,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- footer-bottom -->
 	<div class="footer-bottom">
 		<div class="container">
-			<p>Copyright &copy; 2015.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+			<p>Copyright &copy; 2015.Company name All rights reserved.More Templates</p>
 		</div>
 	</div>
 <!-- footer-bottom -->

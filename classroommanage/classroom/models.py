@@ -48,17 +48,23 @@ class Room(models.Model):
         user = None)
 
 class Order(models.Model):
-    user = models.ForeignKey(User, verbose_name = '用户')
+    user = models.ForeignKey(User, verbose_name = u'用户')
     room = models.ManyToManyField(Room, verbose_name = u'教室以及时间')
     message = models.TextField(verbose_name = u'申请简述')
     is_dealed = models.BooleanField(verbose_name = u'是否处理了', default = False)
     is_agreed = models.BooleanField(verbose_name = u'是否同意了', default = False)
 
     def __unicode__(self):
-        return u'%s %s %s %s' % (self.pk, self.user ,'申请预约教室:',self.room)
+        return u'%s %s %s %s' % (self.pk, self.user, u'申请预约教室:', self.room)
 
-    def autodeal(self):
-        if self.is_agreed == True:
+    def autodeal(self, is_agree):
+        if is_agree:
+            self.is_agreed = True
             self.is_dealed = True
-            self.room.add(self.room)
+            for room in self.room.all():
+                room.user = self.user
+                room.save()
+        else:
+            self.is_dealed = True
+        self.save()
     

@@ -82,12 +82,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 <!-- header -->
 {% if is_super %}
+	{% if orders %}
+		<div> <h3>您有一些待处理的预约申请</h3> </div>
+		<div>
+			<table>
+			<th>申请人</th>
+			<th>教室及时间</th>
+			<th>详情</th>
+			<th>操作</th>
+				{% for order in orders %}
+					<tr>
+					<td><a href="/details/?q={{ order.id }}">{{ order.user.username }}</a></td>
+					<td>{{ order.room.all }} {{ order.room.datetime }}</td>
+					<td><a href="/details/?q={{ order.id }}">查看预约详情</a></td>
+					<td> 
+						<form action="" method="post">
+						{% csrf_token %}
+						<button name="y" value={{ order.id }}>同意</button>
+						<button name="n" value={{ order.id }}>不同意</button>
+						</form>
+					</td>
+					</tr>
+			{% endfor %}
+			</table>
+			<h3>{{ test }}</h3>
+		</div>
+	{% else %}
+		<div> <h3>您暂时没有待处理的申请</h3> </div>
+	{% endif %}
 {% else %}
-<h3>{{ message }}</h3>
+	<div><h3>您没有管理员权限</h3></div>
 {% endif %}
-<!-- banner -->
-<script language="javascript" src="http://map.hit.edu.cn/map.aspx?city=map.hit.edu.cn&w=1350&h=1000&x=18644&y=9492&z=3&text=%d5%fd%d0%c4"></script>
-<!-- what -->
 <!-- footer-top -->
 <div class="footer-top">
 	<div class="container">

@@ -67,27 +67,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<!-- script-for-nav --> 
 					</div>
 					<div class="header-right1">
-						{% if isin%}
-							<li><a href="/updateinform/">{{ name }}</a></li>
-							<li><a href="/changepw/">修改密码</a></li>
-							<li><a href="/logout/">注销</a></li>
-						{% else %}
-							<li><a href="/login/">登录</a></li>
-							<li><a href="/register/">注册</a></li>
-						{% endif %}
+						<li><a href="/login/">登录</a></li>
+						<li><a href="/register/">注册</a></li>
 					</div>
 					<div class="clearfix"> </div>
 				</div>
 			</div>
 	</div>
 <!-- header -->
-{% if is_super %}
-{% else %}
-<h3>{{ message }}</h3>
-{% endif %}
-<!-- banner -->
-<script language="javascript" src="http://map.hit.edu.cn/map.aspx?city=map.hit.edu.cn&w=1350&h=1000&x=18644&y=9492&z=3&text=%d5%fd%d0%c4"></script>
-<!-- what -->
+	<div class="main-head-section">
+		 		<div class="container">
+		 			<h3>注销成功！</h3>
+		 		</div>
+				<div>
+					<h4>感谢您在本站花费的时间！</h4>
+				</div>
+	</div>
 <!-- footer-top -->
 <div class="footer-top">
 	<div class="container">

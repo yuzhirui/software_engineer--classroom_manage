@@ -67,8 +67,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<!-- script-for-nav --> 
 					</div>
 					<div class="header-right1">
-						<li><a href="/login/">{{ name }}</a></li>
-						<li><a href="/register/">注册</a></li>
+						{% if isin%}
+							<li><a href="/updateinform/">{{ name }}</a></li>
+							<li><a href="/changepw/">修改密码</a></li>
+							<li><a href="/logout/">注销</a></li>
+						{% else %}
+							<li><a href="/login/">登录</a></li>
+							<li><a href="/register/">注册</a></li>
+						{% endif %}
 					</div>
 					<div class="clearfix"> </div>
 				</div>
