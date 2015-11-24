@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 <head>
 <title>Contact</title>
@@ -67,7 +67,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<!-- script-for-nav --> 
 					</div>
 					<div class="header-right1">
-						<li><a href="/login/">登陆</a></li>
+						<li><a href="/login/">{{ name }}</a></li>
 						<li><a href="/register/">注册</a></li>
 					</div>
 					<div class="clearfix"> </div>
@@ -79,17 +79,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			 		<div class="container">
 			 			<div class="col-md-8 contact_left">
 			 				<h4>预约申请</h4>
+							<div> <p><font color=#F00> {{ msg }} </font></p> </div>
 			 				<p>你何时使用教室及用途</p>
-							  <form>
-								 <div class="form_details">
-					                 <input type="text" class="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">
-									 <input type="text" class="text" value="Email Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email Address';}">
-									<textarea value="Message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message</textarea>
-									 <div class="clearfix"> </div>
-									 <div class="sub-button">
-									 	<input type="submit" value="发送信息">
-									 </div>
+							  <form name="order" action="" method="post" class="form_details">
+								  <div>
+									<table>
+										{{ order }}
+									</table>
 						          </div>
+								  <div class="sub-button"> <input type="submit" value="发送信息"> </div>
 						       </form>
 					        </div>
 

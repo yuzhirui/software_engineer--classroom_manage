@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.views import login, logout
 from classroom import views 
@@ -12,7 +13,8 @@ urlpatterns = patterns('',
     # url(r'^$', 'classroommanage.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^$', views.home),
-    url(r'^accounts/profile/$', views.home),
+    url(r'^accounts/profile/$', views.order_room),
+    url(r'^updateinform/$', views.updateinform),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^index/$', views.home),
     url(r'^register/$', views.register),

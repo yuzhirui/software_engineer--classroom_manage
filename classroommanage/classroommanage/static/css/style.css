@@ -3042,7 +3042,7 @@ li.dolla {
 }
 .form_details input[type="text"], .form_details textarea {
   padding: 9px;
-  width: 90%;
+  width: 100%;
   font-size: 1em;
 }
 .form_details textarea {

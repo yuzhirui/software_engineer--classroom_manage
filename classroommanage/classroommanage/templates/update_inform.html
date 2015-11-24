@@ -1,7 +1,7 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 <head>
-<title>注册</title>
+<title>Contact</title>
 <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -67,7 +67,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<!-- script-for-nav --> 
 					</div>
 					<div class="header-right1">
-						<li><a href="/login/">登陆</a></li>
+						<li><a href="/login/">{{ name }}</a></li>
 						<li><a href="/register/">注册</a></li>
 					</div>
 					<div class="clearfix"> </div>
@@ -75,36 +75,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 	</div>
 <!-- header -->
-<!-- registration -->
-	<div class="main-1">
-		<div class="container">
-			<div class="register">
-		  	  <form action="" method="post"> 
-				 <div class="register-top-grid">
-					<h3>YOUR INFORMATION</h3>
-
-					 <div class="wow fadeInRight" data-wow-delay="0.4s">
-						<label for="id_username">用户名:</label></th><td><input id="id_username" maxlength="30" name="username" type="text" /><br /><span class="helptext">必填。至少30字母、数字和@/./+/-/_ 。</span>
-					</div>
-					 <div class="wow fadeInRight" data-wow-delay="0.4s">
-						<label for="id_password1">密码:</label></th><td><input id="id_password1" name="password1" type="password" />
-					 </div>
-					 <div class="wow fadeInRight" data-wow-delay="0.4s">
-						<label for="id_password2">确认密码:</label></th><td><input id="id_password2" name="password2" type="password" /><br /><span class="helptext">输入和上面相同的密码.</span>
-					 </div>
-				</div>
-				<div class="clearfix"> </div>
-				<div class="register-but">
-					   <div class="clearfix">
-						 <input type="submit" value="创建账户">
-					   </div>
-				</div>
-			</form>
-		   	</div>
-		 </div>
-	</div>
-<!-- registration -->
-
+	<h4> {{ msg }} </h4>
+	<form form name="inform" action="" method="post">
+		<div>
+			{% if you %}
+				<table>{{ you }}</table>
+			{% endif %}
+		</div>
+		<div class="sub-button">
+			<input type="submit" value="提交">
+		</div>
+	</form>
 <!-- footer-top -->
 <div class="footer-top">
 	<div class="container">
@@ -136,9 +117,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- footer-bottom -->
 	<div class="footer-bottom">
 		<div class="container">
-			<p>Copyright &copy; 2015.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+			<p>Copyright &copy; 2015.Company name All rights reserved.More Templates</p>
 		</div>
 	</div>
 <!-- footer-bottom -->
 </body>
 </html>
+

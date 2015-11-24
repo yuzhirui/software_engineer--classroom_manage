@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for classroommanage project.
 
@@ -44,6 +45,7 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -61,8 +63,10 @@ WSGI_APPLICATION = 'classroommanage.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'roomdb',
+        'USER': 'root',
+        'PASSWORD': 'yuzhirui',
     }
 }
 

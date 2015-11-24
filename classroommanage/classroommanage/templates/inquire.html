@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 <head>
 <title>Contact</title>
@@ -67,7 +67,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<!-- script-for-nav --> 
 					</div>
 					<div class="header-right1">
-						<li><a href="/login/">登陆</a></li>
+						<li><a href="/login/">{{ name }}</a></li>
 						<li><a href="/register/">注册</a></li>
 					</div>
 					<div class="clearfix"> </div>
@@ -75,34 +75,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 	</div>
 <!-- header --> 
-<form name="serch" action="" method="post">
+<form name="search" action="" method="post">
 <div>
-	日期:<input type="date" name="date" />
-	时间：<input type="time" name="time" />
-	一区/二区：
-		<select name="select1">
-			 <option value="1" style="width:200px">一校区</option>
-			 <option value="2" style="width:200px">二校区</option>
-		</select>	
-	教学楼：
-		<select name="select2">
-			 <option style="width:200px">正新楼</option>
-			 <option style="width:200px">诚意楼</option>
-			 <option style="width:200px">格物楼</option>
-			 <option style="width:200px">致知楼</option>
-		</select>
+	{{ inqure }}
 	<input type="submit" value="搜索" />
 
 </div>
 </form>
-{% if table %}
-<table boder=1>
-{% for i in table %}
-<tr>
-<td>{{i}}</td> <td>啊啊啊</td>
-</tr>
-{% endfor %}
-</table>
+{% if rooms %}
+	<table boder=1>
+		{% for room in rooms %}
+			<tr> <a href="/appointment/"> {{ room.name }} </a> </tr>
+			<tr> {{ room.building }} </tr>
+			<tr> {{ room.datetime }} </tr>
+			<tr> <a href="/appointment/"> 预约 </a> </tr>
+		{% endfor %}
+	</table>
 {% endif %}
 
 <!-- footer-top -->
