@@ -26,7 +26,7 @@ class Room(models.Model):
     user = models.ForeignKey(User, null = True, blank = True, verbose_name = u'使用者')
 
     def __unicode__(self):
-        return u'%s %s' % (self.name, self.datetime)
+        return u'%s %s 第%s' % (self.name, self.datetime.date, globalty.Period_list[self.datetime.period][1])
 
     @staticmethod
     def inqureresults(inqure):
@@ -55,7 +55,7 @@ class Order(models.Model):
     is_agreed = models.BooleanField(verbose_name = u'是否同意了', default = False)
 
     def __unicode__(self):
-        return u'%s %s %s %s' % (self.pk, self.user, u'申请预约教室:', self.room)
+        return u'%s %s %s %s%s' % (self.id, self.user.username, u'申请:', self.room.all()[0], u'(等)')
 
     def autodeal(self, is_agree):
         if is_agree:

@@ -7,6 +7,7 @@ import settings
 from django.contrib import admin
 admin.autodiscover()
 
+
 urlpatterns = patterns('',
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     # Examples:
@@ -14,6 +15,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
     url(r'^$', views.home),
     url(r'^admindisplay/$', views.admindisplay),
+    url(r'^details/$', views.orderdetails),
     url(r'^accounts/profile/$', views.order_room),
     url(r'^updateinform/$', views.updateinform),
     url(r'^admin/', include(admin.site.urls)),

@@ -4,7 +4,7 @@ from django.contrib import auth
 #from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from classroom.models import Building, Datetime, Room, Order
 from classroom.forms import InqureForm, FreeroomForm, OrderForm, InformationForm, \
         YourroomForm, ChangepwdForm
@@ -33,11 +33,28 @@ def admindisplay(request):
                 Order.objects.get(id = request.POST.get('y')).autodeal(True)
             else:
                 Order.objects.get(id = request.POST.get('n')).autodeal(False)
-        return render_to_response("admindisplay.html", {'is_super': is_super, 'orders': orders, 'name': u'管理员', 'isin': True})
+        return render_to_response("admindisplay.html", {'is_super': is_super, \
+        'orders': orders, 'name': u'管理员', 'isin': True})
+    else:
+        return render_to_response("index.html", {'name': u'登录', 'isin': False,\
+        'is_super': is_super})
+        
+def orderdetails(request):
+    is_super = False
+    if request.user.is_staff:
+        is_super = True
+        num = request.GET['q']
+        theorder = get_object_or_404(Order, id = num)
+        rooms = theorder.room.all()
+        if request.POST:
+            if request.POST.get('y'):
+                Order.objects.get(id = request.POST.get('y')).autodeal(True)
+            else:
+                Order.objects.get(id = request.POST.get('n')).autodeal(False)
+        return render_to_response("orderdetails.html", {'is_super': is_super, \
+        'theorder': theorder, 'rooms': rooms, 'name': u'管理员', 'isin': True})
     else:
         return render_to_response("index.html", {'name': u'登录', 'isin': False, 'is_super': is_super})
-        
-        
 
 #show the orders and rooms of a user
 def order_room(request):

@@ -8,9 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Muster Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link href='http://fonts.useso.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 <script src="/static/js/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="/static/js/My97DatePicker/WdatePicker.js"></script>
 <link rel="stylesheet" href="/static/css/flexslider.css" type="text/css" media="screen" />		
 </head>
 <body>
@@ -83,7 +83,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- header --> 
 <form name="search" action="" method="post">
 <div>
-	{{ inqure }}
+	<script language="javascript" type="text/javascript" src="/static/js/My97DatePicker/WdatePicker.js"></script>
+	<label for="id_day">日期:</label><input class="Wdate" type="text" name="day" id="id_day" onClick="WdatePicker()"/>
+	<label for="id_period">节次</label>{{ inqure.period }}
+	<label for="id_campus">校区</label>{{ inqure.campus }}
+	<label for="id_building">教学楼</label>{{ inqure.building }}
 	<input type="submit" value="搜索" />
 
 </div>
@@ -103,8 +107,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="footer-top">
 	<div class="container">
 		<div class="col-md-4 foo-left">
-			<a href="/index/"><img src="/static/images/logo.png" class="img-responsive" alt=""></a>
-			<p></p>
 		</div>
 		<div class="col-md-4 foo-left">
 			<h3>今日教室推荐</h3>

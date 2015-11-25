@@ -678,13 +678,13 @@ font-style:italic;
 }
 .footer-top {
   background: #222222;
-  padding: 3em 0;
+  padding: 1em 0;
 }
 .footer-top p {
   color: #eeeeee;
   font-size: 1em;
   font-weight: 400;
-  line-height: 1.8em;
+  line-height: 1em;
   margin: 1em 0;
 }
 .footer-top h6 {
@@ -723,7 +723,7 @@ font-style:italic;
 .footer-bottom p {
   color: #ffffff;
   font-size: 1em;
-  line-height: 1.8em;
+  line-height: 1em;
   font-weight: 400;
 }
 .footer-bottom a {

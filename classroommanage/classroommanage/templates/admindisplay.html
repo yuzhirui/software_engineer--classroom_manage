@@ -86,13 +86,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div> <h3>您有一些待处理的预约申请</h3> </div>
 		<div>
 			<table>
+			<th>申请名</th>
 			<th>申请人</th>
 			<th>教室及时间</th>
 			<th>详情</th>
 			<th>操作</th>
 				{% for order in orders %}
 					<tr>
-					<td><a href="/details/?q={{ order.id }}">{{ order.user.username }}</a></td>
+					<td><a href="/details/?q={{ order.id }}">{{ order }}</a></td>
+					<td>{{ order.user.username }}</td>
 					<td>{{ order.room.all }} {{ order.room.datetime }}</td>
 					<td><a href="/details/?q={{ order.id }}">查看预约详情</a></td>
 					<td> 
@@ -105,7 +107,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</tr>
 			{% endfor %}
 			</table>
-			<h3>{{ test }}</h3>
 		</div>
 	{% else %}
 		<div> <h3>您暂时没有待处理的申请</h3> </div>
@@ -117,8 +118,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="footer-top">
 	<div class="container">
 		<div class="col-md-4 foo-left">
-			<a href="/index/"><img src="/static/images/logo.png" class="img-responsive" alt=""></a>
-			<p></p>
 		</div>
 		<div class="col-md-4 foo-left">
 			<h3>今日教室推荐</h3>
