@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from django.contrib import auth
+from datetime import date
 #from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
@@ -150,6 +151,9 @@ def contact(request):
     else:
         name = u'登录'
     return render_to_response("contact.html", {'name': name, 'isin': isin})
+    
+def search(request, name):
+    rooms = Room.objects.filter(name__icontains = name, datetime__date__gte = date.today()).order_by("datetime")
 
 #search the free room of a certain time
 def inquire(request):

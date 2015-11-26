@@ -66,7 +66,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'roomdb',
         'USER': 'root',
-        'PASSWORD': 'yuzhirui',
+        'PASSWORD': 'yzr070547',
     }
 }
 
