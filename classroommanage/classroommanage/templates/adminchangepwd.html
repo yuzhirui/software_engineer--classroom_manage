@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
 <html>
 <head>
-<title>Contact</title>
+<title>修改密码</title>
 <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,17 +43,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="header-bottom">
 				<div class="container">
-					<div class="logo">
-						<a href="/index/"><img src="/static/images/logo.png" class="img-responsive" alt=""></a>
-					</div>
 					<div class="head-nav">
 						<span class="menu"> </span>
 							<ul class="cl-effect-3">
-								<li class="active"><a href="/index/">首页</a></li>
-								<li><a href=" /inquire/">教室查询</a></li>
-								<li><a href=" /appointment/">教室预约</a></li>
-								<li><a href=" /contact/">联系我们</a></li>
-								<li><a href=" /orders/">已预约</a></li>
+								<li class="active"><a href="/admindisplay/">处理预约</a></li>
+								<li><a href=" /rooms/">管理教室</a></li>
+								<li><a href=" /users/">管理用户</a></li>
+								<li><a href=" /task/">自动添加</a></li>
 									<div class="clearfix"> </div>
 									
 							</ul>
@@ -68,78 +64,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<!-- script-for-nav --> 
 					</div>
 					<div class="header-right1">
-						{% if isin%}
-							<li><a href="/updateinform/">{{ name }}</a></li>
-							<li><a href="/changepw/">修改密码</a></li>
-							<li><a href="/logout/">注销</a></li>
-						{% else %}
-							<li><a href="/login/">登录</a></li>
-							<li><a href="/register/">注册</a></li>
-						{% endif %}
+						<li><a href="/updateinform/">管理员</a></li>
+						<li><a href="/changepw/">修改密码</a></li>
+						<li><a href="/logout/">注销</a></li>
 					</div>
 					<div class="clearfix"> </div>
 				</div>
 			</div>
 	</div>
 <!-- header -->
- <div class="main-head-section">
-		 		<div class="container">
-		 			<h3>联系我们</h3>
-		 		</div>
-		
-		<div class="contact_top">
-			 		<div class="container">
-			 			<div class="col-md-8 contact_left">
-			 				<h4>联系信息</h4>
-			 				<p>你有什么建议和意见？</p>
-							  <form>
-								 <div class="form_details">
-					                 <input type="text" class="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">
-									 <input type="text" class="text" value="Email Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email Address';}">
-									 <input type="text" class="text" value="Subject" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Subject';}">
-									 <textarea value="Message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message</textarea>
-									 <div class="clearfix"> </div>
-									 <div class="sub-button">
-									 	<input type="submit" value="发送信息">
-									 </div>
-						          </div>
-						       </form>
-					        </div>
-					        <div class="col-md-4 company-right">
-					        	<div class="company_ad">
-							     		<h3>联系方式</h3>
-							     		<span>///////</span>
-			      						<address>
-											 <p>email:<lable>info@display.com</lable></p>
-											 <p>手机号: 1.306.222.4545</p>
-									   		<p>222 2nd Ave South</p>
-									   		<p>Saskabush, SK   S7M 1T6</p>
-									 	 	
-							   			</address>
-							   		</div>
-							   		<div class="store">
-							   			<h4>时间段</h4>
-							   			<div class="store-data">
-							   			<div class="col-md-6 days">
-							   				<p>周一到周四</p>
-							   				<p>周五</p>
-							   				<p>周六</p>
-							   				<p>周日或节假日</p>
-							   				
-							   			</div>
-							   			<div class="col-md-6 hours">
-							   				<p> 8 am - 5 pm</p>
-							   				<p>8 am - 6 pm</p>
-							   				<p> 9 am - 5 pm</p>
-							   				<p> Closed</p>
-							   			</div>
-							   			<div class="clearfix"> </div>  
-							   		</div>
-						    </div>				
-							</div>	
-						</div>
-					</div>
-
+<div align="center">
+    <h2>修改密码</h2>
+    
+    {% if oldpassword_is_wrong %}
+        <div>
+            <h4>错误!</h4>原密码不正确
+        </div>
+    {% endif %}
+    <div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <table> {{ form }} </table>
+            <p>
+                <input type="submit" value="确认修改">
+            </p>
+        </form>
+    </div>
+</div>
 <!-- footer-top -->
 <div class="footer-top">
 	<div class="container">

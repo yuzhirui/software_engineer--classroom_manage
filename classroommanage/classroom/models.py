@@ -22,34 +22,41 @@ class Datetime(models.Model):
 class Room(models.Model):
     name = models.CharField(max_length = 30, verbose_name = u'教室名称')
     building = models.ForeignKey(Building, verbose_name = u'教学楼')
-    datetime = models.ForeignKey(Datetime, verbose_name = u'时间和节次')
-    user = models.ForeignKey(User, null = True, blank = True, verbose_name = u'使用者')
+    floor = models.IntegerField(max_length = 2, verbose_name = u'楼层')
 
     def __unicode__(self):
-        return u'%s %s 第%s' % (self.name, self.datetime.date, globalty.Period_list[self.datetime.period][1])
+        return self.name
+#    @staticmethod
+#    def inqureresults(inqure):
+#        if int(inqure['building'].value()) == 10:
+#            if int(inqure['campus'].value()) == 2:
+#                return Room.objects.filter(datetime__date__exact = inqure['day'].value(), \
+#                datetime__period__exact = int(inqure['period'].value()), user = None)
+#            return Room.objects.filter(building__campus__exact = globalty.Campus_list\
+#            [int(inqure['campus'].value())][1], datetime__date__exact = inqure['day'].value(), \
+#            datetime__period__exact = int(inqure['period'].value()), user = None)
+#        if int(inqure['campus'].value()) == 2:
+#            return Room.objects.filter(building__name__exact = globalty.Build_list\
+#            [int(inqure['building'].value())][1], datetime__date__exact = inqure['day'].value(), \
+#            datetime__period__exact = int(inqure['period'].value()), user = None)
+#        return Room.objects.filter(building__name__exact = globalty.Build_list\
+#        [int(inqure['building'].value())][1], building__campus__exact = \
+#        globalty.Campus_list[int(inqure['campus'].value())][1], datetime__date__exact = \
+#        inqure['day'].value(), datetime__period__exact = int(inqure['period'].value()), \
+#        user = None)
 
-    @staticmethod
-    def inqureresults(inqure):
-        if int(inqure['building'].value()) == 10:
-            if int(inqure['campus'].value()) == 2:
-                return Room.objects.filter(datetime__date__exact = inqure['day'].value(), \
-                datetime__period__exact = int(inqure['period'].value()), user = None)
-            return Room.objects.filter(building__campus__exact = globalty.Campus_list\
-            [int(inqure['campus'].value())][1], datetime__date__exact = inqure['day'].value(), \
-            datetime__period__exact = int(inqure['period'].value()), user = None)
-        if int(inqure['campus'].value()) == 2:
-            return Room.objects.filter(building__name__exact = globalty.Build_list\
-            [int(inqure['building'].value())][1], datetime__date__exact = inqure['day'].value(), \
-            datetime__period__exact = int(inqure['period'].value()), user = None)
-        return Room.objects.filter(building__name__exact = globalty.Build_list\
-        [int(inqure['building'].value())][1], building__campus__exact = \
-        globalty.Campus_list[int(inqure['campus'].value())][1], datetime__date__exact = \
-        inqure['day'].value(), datetime__period__exact = int(inqure['period'].value()), \
-        user = None)
+class Useroom(models.Model):
+    room = models.ForeignKey(Room, verbose_name = u'教室')
+    datetime = models.ForeignKey(Datetime, verbose_name = u'时间和节次')
+    user = models.ForeignKey(User, null = True, blank = True, verbose_name = u'使用者')
+    
+    def __unicode__(self):
+        return u'%s %s %s' % (self.room, self.datetime, self.user)
 
 class Order(models.Model):
     user = models.ForeignKey(User, verbose_name = u'用户')
-    room = models.ManyToManyField(Room, verbose_name = u'教室以及时间')
+    room = models.ManyToManyField(Room, verbose_name = u'教室')
+    datetime = models.ForeignKey(Datetime, verbose_name = u'时间和节次')
     message = models.TextField(verbose_name = u'申请简述')
     is_dealed = models.BooleanField(verbose_name = u'是否处理了', default = False)
     is_agreed = models.BooleanField(verbose_name = u'是否同意了', default = False)
@@ -67,4 +74,4 @@ class Order(models.Model):
         else:
             self.is_dealed = True
         self.save()
-    
+

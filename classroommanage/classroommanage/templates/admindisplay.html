@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
 <html>
 <head>
-<title>首页</title>
+<title>待处理的预约</title>
 <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,6 +11,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link href='http://fonts.useso.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 <script src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/Admin/core.js"></script>
+<script type="text/javascript" src="/static/js/Admin/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="/static/js/Admin/jquery.js"></script>
+<script type="text/javascript" src="/static/js/Admin/jquery.init.js"></script>
+<script type="text/javascript" src="/static/js/Admin/actions.js"></script>
 <link rel="stylesheet" href="/static/css/flexslider.css" type="text/css" media="screen" />		
 </head>
 <body>
@@ -43,16 +48,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="header-bottom">
 				<div class="container">
-					<div class="logo">
-						<a href="/index/"><img src=""/static/images/logo.png" class="img-responsive" alt=""></a>
-					</div>
 					<div class="head-nav">
 						<span class="menu"> </span>
 							<ul class="cl-effect-3">
-								<li class="active"><a href="/index/">首页</a></li>
-								<li><a href=" /inquire/">教室查询</a></li>
-								<li><a href=" /appointment/">教室预约</a></li>
-								<li><a href=" /contact/">联系我们</a></li>
+								<li class="active"><a href="/admindisplay/">处理预约</a></li>
+								<li><a href=" /rooms/">管理教室</a></li>
+								<li><a href=" /users/">管理用户</a></li>
+								<li><a href=" /task/">自动添加</a></li>
 									<div class="clearfix"> </div>
 									
 							</ul>
@@ -67,20 +69,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<!-- script-for-nav --> 
 					</div>
 					<div class="header-right1">
-						{% if isin%}
-							<li><a href="/updateinform/">{{ name }}</a></li>
-							<li><a href="/changepw/">修改密码</a></li>
-							<li><a href="/logout/">注销</a></li>
-						{% else %}
-							<li><a href="/login/">登录</a></li>
-							<li><a href="/register/">注册</a></li>
-						{% endif %}
+						<li><a href="/updateinform/">管理员</a></li>
+						<li><a href="/changepw/">修改密码</a></li>
+						<li><a href="/logout/">注销</a></li>
 					</div>
 					<div class="clearfix"> </div>
 				</div>
 			</div>
 	</div>
 <!-- header -->
+<div align="center">
 {% if is_super %}
 	{% if orders %}
 		<div> <h3>您有一些待处理的预约申请</h3> </div>
@@ -114,6 +112,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 {% else %}
 	<div><h3>您没有管理员权限</h3></div>
 {% endif %}
+</div>
 <!-- footer-top -->
 <div class="footer-top">
 	<div class="container">

@@ -53,6 +53,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li><a href=" /inquire/">教室查询</a></li>
 								<li><a href=" /appointment/">教室预约</a></li>
 								<li><a href=" /contact/">联系我们</a></li>
+								<li><a href=" /orders/">已预约</a></li>
 									<div class="clearfix"> </div>
 									
 							</ul>
@@ -95,12 +96,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 {% if rooms %}
 	<table boder=1>
 		{% for room in rooms %}
-			<tr> <a href="/appointment/"> {{ room.name }} </a> </tr>
+			<tr> <a href="/appointment/?q={{ room.id }}"> {{ room.name }} </a> </tr>
 			<tr> {{ room.building }} </tr>
 			<tr> {{ room.datetime }} </tr>
-			<tr> <a href="/appointment/"> 预约 </a> </tr>
+			<tr> <a href="/appointment/?q={{ room.id }}"> 预约 </a> </tr>
+			</br>
 		{% endfor %}
 	</table>
+{% else %}
+	<h4>{{ msg }}</h4>
 {% endif %}
 
 <!-- footer-top -->

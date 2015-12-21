@@ -15,7 +15,6 @@ class InqureForm(forms.Form):
 class FreeroomForm(ModelForm):
     class Meta:
         model = Room
-        exclude = ('user',)
 
 class OrderForm(ModelForm):
     class Meta:

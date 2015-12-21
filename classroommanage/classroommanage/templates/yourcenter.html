@@ -53,6 +53,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li><a href=" /inquire/">教室查询</a></li>
 								<li><a href=" /appointment/">教室预约</a></li>
 								<li><a href=" /contact/">联系我们</a></li>
+								<li><a href=" /orders/">已预约</a></li>
 									<div class="clearfix"> </div>
 									
 							</ul>
@@ -97,7 +98,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	{% if roomforms %}
 		<h4> 您预约成功的教室如下 </h4>
 		{% for roomform in roomforms %}
-			<table> {{ roomform }} </table>
+			<table> {{ roomform.room }} </table>
+			<table> {{ roomform.datetime }}</table>
 		{% endfor %}
 	{% else %}
 		<h4> 您没有预约成功的教室 </h4>
