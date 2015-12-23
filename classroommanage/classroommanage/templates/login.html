@@ -1,15 +1,10 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
 <head>
-<title>待处理的预约</title>
+<title>登陆</title>
 <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <script src="/static/js/jquery.min.js"></script>
-<script type="text/javascript" src="/static/js/Admin/core.js"></script>
-<script type="text/javascript" src="/static/js/Admin/admin/RelatedObjectLookups.js"></script>
-<script type="text/javascript" src="/static/js/Admin/jquery.js"></script>
-<script type="text/javascript" src="/static/js/Admin/jquery.init.js"></script>
-<script type="text/javascript" src="/static/js/Admin/actions.js"></script>
 <link rel="stylesheet" href="/static/css/flexslider.css" type="text/css" media="screen" />		
 </head>
 <body>
@@ -42,13 +37,16 @@
 			</div>
 			<div class="header-bottom">
 				<div class="container">
+					<div class="logo">
+						<a href="/index/"><img src="/static/images/logo.png" class="img-responsive" alt=""></a>
+					</div>
 					<div class="head-nav">
 						<span class="menu"> </span>
 							<ul class="cl-effect-3">
-								<li class="active"><a href="/admindisplay/">处理预约</a></li>
-								<li><a href=" /rooms/">管理教室</a></li>
-								<li><a href=" /users/">管理用户</a></li>
-								<li><a href=" /task/">自动添加</a></li>
+								<li class="active"><a href="/index/">首页</a></li>
+								<li><a href=" /inquire/">教室查询</a></li>
+								<li><a href=" /appointment/">教室预约</a></li>
+								<li><a href=" /contact/">联系我们</a></li>
 									<div class="clearfix"> </div>
 									
 							</ul>
@@ -63,50 +61,47 @@
 						<!-- script-for-nav --> 
 					</div>
 					<div class="header-right1">
-						<li><a href="/updateinform/">管理员</a></li>
-						<li><a href="/changepw/">修改密码</a></li>
-						<li><a href="/logout/">注销</a></li>
+						<li><a href="/login/">登陆</a></li>
+						<li><a href="/register/">注册</a></li>
 					</div>
 					<div class="clearfix"> </div>
 				</div>
 			</div>
 	</div>
 <!-- header -->
-<div align="center">
-{% if is_super %}
-	{% if orders %}
-		<div> <h3>您有一些待处理的预约申请</h3> </div>
-		<div>
-			<table>
-			<th>申请名</th>
-			<th>申请人</th>
-			<th>教室及时间</th>
-			<th>详情</th>
-			<th>操作</th>
-				{% for order in orders %}
-					<tr>
-					<td><a href="/details/?q={{ order.id }}">{{ order }}</a></td>
-					<td>{{ order.user.username }}</td>
-					<td>{{ order.room.all }} {{ order.room.datetime }}</td>
-					<td><a href="/details/?q={{ order.id }}">查看预约详情</a></td>
-					<td> 
-						<form action="" method="post">
+<!-- login -->
+	<div class="login-page">
+		<div class="container">
+			<div class="account_grid">
+				<div class="col-md-6 login-left wow fadeInLeft" data-wow-delay="0.4s">
+					<h3>新用户</h3>
+					<p>创建一个新账户, 你将可以预约教室</p>
+					<a class="acount-btn" href="/register/">新建账户</a>
+			   </div>
+			   <div class="col-md-6 login-right wow fadeInRight" data-wow-delay="0.4s">
+					<h3>已注册</h3>
+					<p>如果已有账户，请登陆</p>
+					<form action="" method="post">
 						{% csrf_token %}
-						<button name="y" value={{ order.id }}>同意</button>
-						<button name="n" value={{ order.id }}>不同意</button>
-						</form>
-					</td>
-					</tr>
-			{% endfor %}
-			</table>
+						<div>
+							<span>用户名<label>*</label></span>
+							<input type="text" name="username" value="" id="username">
+						</div>
+						<div>
+							<span>密码<label>*</label></span>
+							<input type="password" name="password" value="" id="password"> 
+						</div>
+						<a class="forgot" href="#">忘记密码?</a>
+						<input type="submit" value="登陆">
+					</form>
+			   </div>	
+				<div class="clearfix"> </div>
+			</div>
 		</div>
-	{% else %}
-		<div> <h3>您暂时没有待处理的申请</h3> </div>
-	{% endif %}
-{% else %}
-	<div><h3>您没有管理员权限</h3></div>
-{% endif %}
-</div>
+	</div>
+<!-- login -->
+
+
 <!-- footer-top -->
 <div class="footer-top">
 	<div class="container">
@@ -136,7 +131,7 @@
 <!-- footer-bottom -->
 	<div class="footer-bottom">
 		<div class="container">
-			<p>Copyright &copy; 2015.Company name All rights reserved.More Templates </p>
+			<p>Copyright &copy; 2015.Company name All rights reserved.More Templates</p>
 		</div>
 	</div>
 <!-- footer-bottom -->

@@ -1,14 +1,9 @@
 ﻿<!DOCTYPE HTML>
 <html>
 <head>
-<title>Contact</title>
+<title>查询教室</title>
 <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Muster Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-<link href='http://fonts.useso.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 <script src="/static/js/jquery.min.js"></script>
 <script language="javascript" type="text/javascript" src="/static/js/My97DatePicker/WdatePicker.js"></script>
 <link rel="stylesheet" href="/static/css/flexslider.css" type="text/css" media="screen" />		
@@ -43,9 +38,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="header-bottom">
 				<div class="container">
-					<div class="logo">
-						<a href="/index/"><img src="/static/images/logo.png" class="img-responsive" alt=""></a>
-					</div>
 					<div class="head-nav">
 						<span class="menu"> </span>
 							<ul class="cl-effect-3">
@@ -53,6 +45,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li><a href=" /inquire/">教室查询</a></li>
 								<li><a href=" /appointment/">教室预约</a></li>
 								<li><a href=" /contact/">联系我们</a></li>
+								<li><a href=" /orders/">已预约</a></li>
 									<div class="clearfix"> </div>
 									
 							</ul>
@@ -92,15 +85,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </div>
 </form>
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script>
+    $(document).ready(function(){
+      $("#id_campus").click(function(){
+        var n = $("#id_campus").val()
+		$.get("/bui/",{'num', n}, function(ret){
+			$("#id_building").html(ret);
+		});
+	  })
+    });
+</script>
+
 {% if rooms %}
 	<table boder=1>
 		{% for room in rooms %}
-			<tr> <a href="/appointment/"> {{ room.name }} </a> </tr>
+			<tr> <a href="/appointment/?q={{ room.id }}"> {{ room.name }} </a> </tr>
 			<tr> {{ room.building }} </tr>
-			<tr> {{ room.datetime }} </tr>
-			<tr> <a href="/appointment/"> 预约 </a> </tr>
+			<tr> <a href="/appointment/?q={{ room.id }}"> 预约 </a> </tr>
+			</br>
 		{% endfor %}
 	</table>
+{% else %}
+	<h4>{{ msg }}</h4>
 {% endif %}
 
 <!-- footer-top -->

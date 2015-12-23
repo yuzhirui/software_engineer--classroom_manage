@@ -1,15 +1,9 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>登陆</title>
+<title>欢迎</title>
 <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Muster Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<link href='http://fonts.useso.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 <script src="/static/js/jquery.min.js"></script>
 <link rel="stylesheet" href="/static/css/flexslider.css" type="text/css" media="screen" />		
 </head>
@@ -43,16 +37,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="header-bottom">
 				<div class="container">
-					<div class="logo">
-						<a href="/index/"><img src="/static/images/logo.png" class="img-responsive" alt=""></a>
-					</div>
 					<div class="head-nav">
 						<span class="menu"> </span>
 							<ul class="cl-effect-3">
-								<li class="active"><a href="/index/">首页</a></li>
-								<li><a href=" /inquire/">教室查询</a></li>
-								<li><a href=" /appointment/">教室预约</a></li>
-								<li><a href=" /contact/">联系我们</a></li>
+								<li class="active"><a href="/admindisplay/">处理预约</a></li>
+								<li><a href=" /rooms/">管理教室</a></li>
+								<li><a href=" /users/">管理用户</a></li>
+								<li><a href=" /task/">自动添加</a></li>
 									<div class="clearfix"> </div>
 									
 							</ul>
@@ -67,46 +58,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<!-- script-for-nav --> 
 					</div>
 					<div class="header-right1">
-						<li><a href="/login/">登陆</a></li>
-						<li><a href="/register/">注册</a></li>
+						<li><a href="/updateinform/">管理员</a></li>
+						<li><a href="/changepw/">修改密码</a></li>
+						<li><a href="/logout/">注销</a></li>
 					</div>
 					<div class="clearfix"> </div>
 				</div>
 			</div>
 	</div>
 <!-- header -->
-<!-- login -->
-	<div class="login-page">
-		<div class="container">
-			<div class="account_grid">
-				<div class="col-md-6 login-left wow fadeInLeft" data-wow-delay="0.4s">
-					<h3>新用户</h3>
-					<p>创建一个新账户, 你将可以预约教室</p>
-					<a class="acount-btn" href="/register/">新建账户</a>
-			   </div>
-			   <div class="col-md-6 login-right wow fadeInRight" data-wow-delay="0.4s">
-					<h3>已注册</h3>
-					<p>如果已有账户，请登陆</p>
-					<form action="" method="post">
-						{% csrf_token %}
-						<div>
-							<span>用户名<label>*</label></span>
-							<input type="text" name="username" value="" id="username">
-						</div>
-						<div>
-							<span>密码<label>*</label></span>
-							<input type="password" name="password" value="" id="password"> 
-						</div>
-						<a class="forgot" href="#">忘记密码?</a>
-						<input type="submit" value="登陆">
-					</form>
-			   </div>	
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
-<!-- login -->
+<!-- admin -->
 
+	<div class="main-head-section">
+		 		<div class="container">
+		 			<h3>欢迎管理员！</h3>
+		 		</div>
+	</div>
 
 <!-- footer-top -->
 <div class="footer-top">

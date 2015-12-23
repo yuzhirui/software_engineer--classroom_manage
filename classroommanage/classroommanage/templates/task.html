@@ -1,15 +1,10 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
 <head>
-<title>待处理的预约</title>
+<title>欢迎</title>
 <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <script src="/static/js/jquery.min.js"></script>
-<script type="text/javascript" src="/static/js/Admin/core.js"></script>
-<script type="text/javascript" src="/static/js/Admin/admin/RelatedObjectLookups.js"></script>
-<script type="text/javascript" src="/static/js/Admin/jquery.js"></script>
-<script type="text/javascript" src="/static/js/Admin/jquery.init.js"></script>
-<script type="text/javascript" src="/static/js/Admin/actions.js"></script>
 <link rel="stylesheet" href="/static/css/flexslider.css" type="text/css" media="screen" />		
 </head>
 <body>
@@ -72,41 +67,14 @@
 			</div>
 	</div>
 <!-- header -->
-<div align="center">
-{% if is_super %}
-	{% if orders %}
-		<div> <h3>您有一些待处理的预约申请</h3> </div>
-		<div>
-			<table>
-			<th>申请名</th>
-			<th>申请人</th>
-			<th>教室及时间</th>
-			<th>详情</th>
-			<th>操作</th>
-				{% for order in orders %}
-					<tr>
-					<td><a href="/details/?q={{ order.id }}">{{ order }}</a></td>
-					<td>{{ order.user.username }}</td>
-					<td>{{ order.room.all }} {{ order.room.datetime }}</td>
-					<td><a href="/details/?q={{ order.id }}">查看预约详情</a></td>
-					<td> 
-						<form action="" method="post">
-						{% csrf_token %}
-						<button name="y" value={{ order.id }}>同意</button>
-						<button name="n" value={{ order.id }}>不同意</button>
-						</form>
-					</td>
-					</tr>
-			{% endfor %}
-			</table>
-		</div>
-	{% else %}
-		<div> <h3>您暂时没有待处理的申请</h3> </div>
-	{% endif %}
-{% else %}
-	<div><h3>您没有管理员权限</h3></div>
-{% endif %}
-</div>
+<!-- admin -->
+
+	<div class="main-head-section">
+		 		<div class="container">
+		 			<h3>{{ msg }}！</h3>
+		 		</div>
+	</div>
+
 <!-- footer-top -->
 <div class="footer-top">
 	<div class="container">
@@ -136,7 +104,7 @@
 <!-- footer-bottom -->
 	<div class="footer-bottom">
 		<div class="container">
-			<p>Copyright &copy; 2015.Company name All rights reserved.More Templates </p>
+			<p>Copyright &copy; 2015.Company name All rights reserved.More Templates</p>
 		</div>
 	</div>
 <!-- footer-bottom -->

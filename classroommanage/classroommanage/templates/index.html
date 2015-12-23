@@ -4,14 +4,32 @@
 <title>首页</title>
 <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Muster Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<link href='http://fonts.useso.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 <script src="/static/js/jquery.min.js"></script>
 <link rel="stylesheet" href="/static/css/flexslider.css" type="text/css" media="screen" />		
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/common.css" /> -->
+<script language="javascript" type="text/javascript" src="/static/js/My97DatePicker/WdatePicker.js"></script>
+<style type="text/css">
+	.front{width: 400px;margin: 5px 32px 45px 32px;background-color: #f0f0f0;	color: #666;text-align: center;padding: 3px;border-radius: 5px;}
+	.booking_area {float: right;position: relative;width:400px;height: 500px; }
+	.booking_area h3 {margin: 5px 5px 0 0;font-size: 16px;}
+	.booking_area p{line-height:26px; font-size:16px; color:#999}
+	.booking_area p span{color:#666}
+	div.seatCharts-cell {color: #182C4E;height: 30px;width: 80px;line-height: 25px;margin: 3px;float: left;text-align: center;outline: none;font-size: 13px;}
+	div.seatCharts-seat {color: #fff;cursor: pointer;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
+	div.seatCharts-row {height: 35px;}
+	div.seatCharts-seat.available {background-color: #B9DEA0;}
+	div.seatCharts-seat.focused {background-color: #76B474;border: none;}
+	div.seatCharts-seat.selected {background-color: #E6CAC4;}
+	div.seatCharts-seat.unavailable {background-color: #472B34;cursor: not-allowed;}
+	div.seatCharts-container {border-right: 1px dotted #adadad;width: 500px;padding: 20px;float: left;}
+	div.seatCharts-legend {padding-left: 0px;position: absolute;bottom: 16px;}
+	ul.seatCharts-legendList {padding-left: 0px;}
+	.seatCharts-legendItem{float:left; width:90px;margin-top: 10px;line-height: 2;}
+	span.seatCharts-legendDescription {margin-left: 5px;line-height: 30px;}
+	.checkout-button {display: block;width:80px; height:24px; line-height:20px;margin: 10px auto;border:1px solid #999;font-size: 14px; cursor:pointer}
+	#seats_chose {max-height: 120px;overflow-y: auto;overflow-x: none;width: 200px;}
+	#seats_chose li{float:left; width:72px; height:26px; line-height:26px; border:1px solid #d3d3d3; background:#f7f7f7; margin:6px; font-size:14px; font-weight:bold; text-align:center}
+</style>
 </head>
 <body>
 <!-- header -->
@@ -53,6 +71,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li><a href=" /inquire/">教室查询</a></li>
 								<li><a href=" /appointment/">教室预约</a></li>
 								<li><a href=" /contact/">联系我们</a></li>
+								<li><a href=" /orders/">已预约</a></li>
 									<div class="clearfix"> </div>
 									
 							</ul>
@@ -86,8 +105,174 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <h3>{{ message }}</h3>
 {% endif %}
 <!-- banner -->
-<script language="javascript" src="http://map.hit.edu.cn/map.aspx?city=map.hit.edu.cn&w=1350&h=1000&x=18644&y=9492&z=3&text=%d5%fd%d0%c4"></script>
-<!-- what -->
+<div class="container">
+            <h3>预约教室</h3>
+            <div class="demo clearfix">
+                <!---左边座位列表----->
+                <div id="seat_area">
+                    <div class="front">北</div>					
+                </div>
+                <!---右边选教室信息----->
+                <div class="booking_area">
+				<form action="/inq/" method="get">
+					<p><label for="id_campus">校区:</label>
+						<select id="id_campus" name="campus">
+							<option value="0">全部</option>
+							<option value="1">一校区</option>  
+							<option value="2">二校区</option>  
+						</select></p>
+                    <p><label for="id_building">教学楼:</label>
+						<select id="id_building" name="building">  
+							<option value="0">正心楼</option>  
+							<option value="1">诚意楼</option>  
+							<option value="2">格物楼</option>  
+							<option value="3">致知楼</option>  
+							<option value="4">电机楼</option>  
+							<option value="5">机械楼</option>  
+							<option value="6">主楼</option>  
+							<option value="7">东配楼</option>  
+							<option value="8">西配楼</option>  
+							<option value="9">青年公寓</option>  
+						</select></p>
+					<p><label for="id_floor">楼层:</label>
+						<select id="id_floor" name="floor">
+							<option value="0">一楼</option>
+							<option value="1">二楼</option>
+							<option value="2">三楼</option>
+							<option value="3">四楼</option>
+							<option value="4">五楼</option>
+							<option value="5">六楼</option>
+							<option value="6">七楼</option>
+							<option value="7">八楼</option>
+							<option value="8">九楼</option>
+							<option value="9">十楼</option>
+						</select></p>
+                    <p><label for="id_day">日期:</label>
+					<input class="Wdate" type="text" name="day" id="id_day" onClick="WdatePicker()"/>
+					</p>
+					<p><label for="id_period">节次:</label>
+						<select id="id_period" name="period">
+							<option value="0">第一二节</option>
+							<option value="1">第三四节</option>
+							<option value="2">第五六节</option>
+							<option value="3">第七八节</option>
+							<option value="4">第九十节</option>
+						</select></p>
+					<button type="button" id='id_inq' class="btn">查看</button>
+					</form>
+					<form action="/action/" method="get">
+                    <label for="id_rooms"><p>教室:</p></label>
+                    <ul id="seats_chose"></ul>
+                    <p>总数:<span id="tickects_num" >0</span></p>
+
+                    <button type="button" id='id_order' class="btn"> 确定预约</button>
+					</form>
+					<p id="test"></p>
+                    <div id="legend"></div>
+                </div>
+            </div>
+        </div>
+    
+        <script type="text/javascript" src="/static/js/jquery.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.seat-charts.min.js"></script>
+		<script type="text/javascript">
+            $(document).ready(function() {
+				$("#id_campus").click(function(){
+					var campus = $("#id_campus").val();
+					$.get("/bui/",{'n':campus}, function(ret){
+						$("#id_building").html(ret);
+					})
+				 }); 
+				$("#id_building").click(function(){
+					var build = $("#id_building").val();
+					$.get("/flo/",{'build':build}, function(ret){
+						$("#id_floor").html(ret);
+					})
+				
+				});
+				
+				$("#id_inq").click(function(){
+				var build = $("#id_building").val();
+				var floor = $("#id_floor").val();
+				var day = $("#id_day").val();
+				var period = $("#id_period").val();
+
+					$.get("/inq/",{'build':build,'floor':floor,'day':day,'period':period}, function(ret){
+						<!-- $('#result').html(ret) -->
+						var $cart = $('#seats_chose'), //教室区
+						$tickects_num = $('#tickects_num'); //总数
+
+						var sc = $('#seat_area').seatCharts({
+							map: [ret[0]],
+							naming: {//设置行列等信息
+								top: false, //不显示顶部横坐标（行） 
+								left: false,//不显示左边纵坐标（列）
+								getLabel: function(character, row, column) { //返回教室信息 
+									return ret[1][column-1]+' ';
+								}
+							},
+							legend: {//定义图例
+								node: $('#legend'),
+								items: [
+									['c', 'available', '可预约'],
+									['a', 'unavailable', '已占用']
+								]
+							},
+							click: function() {
+								if (this.status() == 'available') { //若为可预约状态，添加教室
+									$('<li id="room' + this.settings.column + '">' + this.settings.label + '</li>')
+											.attr('id', 'cart-item-' + this.settings.id)
+											.data('seatId', this.settings.id)
+											.appendTo($cart);
+
+									$tickects_num.text(sc.find('selected').length + 1); //统计选择教室数量
+
+									return 'selected';
+								} else if (this.status() == 'selected') { //若为选中状态
+
+									$tickects_num.text(sc.find('selected').length - 1);//更新教室数量
+									$('#cart-item-' + this.settings.id).remove();//删除已预订教室
+
+									return 'available';
+								} else if (this.status() == 'unavailable') { //若为已占用状态
+									return 'unavailable';
+								} else {
+									return this.style();
+								}
+							}
+						});
+						
+						//设置已售出的座位
+						sc.find('a').status('unavailable');
+					})
+					
+				});
+				
+				$("#id_order").click(function(){
+					var rooms = $("#seats_chose").text();
+					var day = $("#id_day").val();
+					var period = $("#id_period").val();
+					if (rooms){
+						var message = window.prompt("预约简述", "");
+					}else{
+						window.alert("您未选中任何教室！");
+					}
+					
+					$.get("/submit/",{'rooms':rooms,'day':day,'period':period,'message':message}, function(ret){
+						if (ret){
+							window.alert("预约提交成功！")						
+						}else{
+							window.alert("预约提交失败！")
+						}
+					})
+				});
+
+            });
+			
+        </script>
+
+<!-- <script language="javascript" src="http://map.hit.edu.cn/map.aspx?city=map.hit.edu.cn&w=1350&h=1000&x=18644&y=9492&z=3&text=%d5%fd%d0%c4"></script>
+ --><!-- what -->
 <!-- footer-top -->
 <div class="footer-top">
 	<div class="container">
