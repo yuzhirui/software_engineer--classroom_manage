@@ -2,6 +2,10 @@
 <html>
 <head>
 <title>已预约</title>
+<link href="/static/css/common/style.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/common/content.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/common/pageTag.css" rel="stylesheet" type="text/css" />
+
 <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <script src="/static/js/jquery.min.js"></script>
@@ -14,7 +18,7 @@
 				<div class="container">
 					<div class="head-left">
 						<ul class="number">
-							<li><span><i class="phone"> </i>+0123 456 789</span></li>
+							<li><span><i class="phone"> </i>欢迎使用</span></li>
 							<li><a href="mailto:info@example.com"><i class="mail"> </i>hello@address.com</a></li>	
 								<div class="clearfix"> </div>						
 						</ul>
@@ -73,62 +77,75 @@
 			</div>
 	</div>
 <!-- header -->
-	<h4> {{ msg }} </h4>
-	<div>
-	{% if orderforms %}
+<div align="center" class="container">
+	<h4> {{ msg }} </h4>	
+	{% if orders %}
 		<h4> 您已预约的教室如下 </h4>
-		{% for orderform in orderforms %}
-			<table> {{ orderform }} </table>
+		<div style="max-height: 200px;overflow-y: auto;overflow-x: none;">
+		<table width="100%"  cellpadding="0" cellspacing="0" style="border-collapse:collapse" class="bot_line">
+		  <th>时间节次</th>
+		  <th>教室</th>
+		  <th>简述</th>
+		  <th>操作</th>
+		{% for order in orders %}
+			<tr class="bgcol" >
+       			<td>{{ order.datetime }}</td>
+				<td>{% for ro in order.room.all %} {{ ro }} {% endfor %}</td>
+				<td>{{ order.message }}</td>
+				<td><form action="" method="post">
+						{% csrf_token %}
+						<button name="d" value={{ order.id }}>删除</button>
+					</form>
+				</td>
+			</tr>
 		{% endfor %}
+		</table>
 	{% else %}
 		<h4> 您尚未预约教室 </h4>
 	{% endif %}
-	
 	</div>
-	<div>
+	<div align="center" style="position: relative; top: 50px; max-height: 200px;overflow-y: auto;overflow-x: none;">
 	{% if roomforms %}
 		<h4> 您预约成功的教室如下 </h4>
+		<table width="100%"  cellpadding="0" cellspacing="0" style="border-collapse:collapse" class="bot_line">
+		<th>教室</th>
+		<th>时间节次</th>
 		{% for roomform in roomforms %}
-			<table> {{ roomform.room }} </table>
-			<table> {{ roomform.datetime }}</table>
+			<tr class="bgcol" >
+       			<td>{{ roomform.room }}</td>
+				<td>{{ roomform.datetime }}</td>
+			</tr>
 		{% endfor %}
 	{% else %}
 		<h4> 您没有预约成功的教室 </h4>
 	{% endif %}
+		</table>
 	</div>
+</div>
 <!-- footer-top -->
 <div class="footer-top">
 	<div class="container">
 		<div class="col-md-4 foo-left">
 		</div>
 		<div class="col-md-4 foo-left">
-			<h3>今日教室推荐</h3>
-			<h6>大教室</h6>
-			<p>//////</p>
-			<h6>小教室</h6>
-			<p>//////</p>
+			<h3>欢迎使用教室管理系统</h3>
 		</div>
 		<div class="col-md-4 foo-left">
 			<h3>友情链接</h3>
 				<ul>
 					
-					<li><a href="http://jwc.hit.edu.cn">教务处</a></li>
-					<li><a href="http://today.hit.edu.cn">今日哈工大</a></li>
-					<li><a href="/contact/">联系我们</a></li>
-						<div class="clearfix"> </div>		
+					<li><a href="http://jwc.hit.edu.cn">教务处</a></li>	
 				</ul>
 		</div>
-		<div class="clearfix"> </div>
 	</div>
 </div>
 <!-- footer-top -->
 <!-- footer-bottom -->
 	<div class="footer-bottom">
 		<div class="container">
-			<p>Copyright &copy; 2015.Company name All rights reserved.More Templates</p>
+			<p>Copyright &copy; 2015.Company name All rights reserved. </p>
 		</div>
 	</div>
 <!-- footer-bottom -->
 </body>
 </html>
-

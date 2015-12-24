@@ -18,6 +18,8 @@ class Datetime(models.Model):
 
     def __unicode__(self):
         return u'%s 第%s' % (self.date, globalty.Period_list[self.period][1])
+    def output(self):
+        return u'%s 第%s' % (self.date, globalty.Period_list[self.period][1])
 
 class Room(models.Model):
     name = models.CharField(max_length = 30, verbose_name = u'教室名称')
@@ -39,14 +41,14 @@ class Useroom(models.Model):
     @staticmethod
     def inqureresults(inqure):
         if int(inqure['building'].value()) == 10:
-            if int(inqure['campus'].value()) == 2:
+            if int(inqure['campus'].value()) == 0:
                 tabs = Useroom.objects.filter(datetime__date__exact = inqure['day'].value(), \
                 datetime__period__exact = int(inqure['period'].value()), user = None)
             else:
                 tabs = Useroom.objects.filter(room__building__campus__exact = globalty.Campus_list\
                 [int(inqure['campus'].value())][1], datetime__date__exact = inqure['day'].value(), \
                 datetime__period__exact = int(inqure['period'].value()), user = None)
-        elif int(inqure['campus'].value()) == 2:
+        elif int(inqure['campus'].value()) == 0:
             tabs = Useroom.objects.filter(room__building__name__exact = globalty.Build_list\
             [int(inqure['building'].value())][1], datetime__date__exact = inqure['day'].value(), \
             datetime__period__exact = int(inqure['period'].value()), user = None)
@@ -72,6 +74,8 @@ class Order(models.Model):
 
     def __unicode__(self):
         return u'%s %s %s %s%s' % (self.id, self.user.username, u'申请:', self.room.all()[0], u'(等)')
+    def output(self):
+        return u'%s %s %s %s%s' % (self.id, self.user.username, u'申请:', self.room.all()[0], u'(等)')        
 
     def autodeal(self, is_agree):
         if is_agree:

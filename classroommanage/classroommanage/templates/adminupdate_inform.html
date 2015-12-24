@@ -41,8 +41,6 @@
 						<span class="menu"> </span>
 							<ul class="cl-effect-3">
 								<li class="active"><a href="/admindisplay/">处理预约</a></li>
-								<li><a href=" /rooms/">管理教室</a></li>
-								<li><a href=" /users/">管理用户</a></li>
 								<li><a href=" /task/">自动添加</a></li>
 									<div class="clearfix"> </div>
 									
@@ -67,49 +65,46 @@
 			</div>
 	</div>
 <!-- header -->
-	<div align="center">
-	<h4> {{ msg }} </h4>
-	<form name="inform" action="" method="post">
-		<div>
-			{% if you %}
-				<table>{{ you }}</table>
-			{% endif %}
+<div class="main-1">
+	<div class="container" align = "center">
+		<div class="register">
+			<div class="register-top-grid">
+				<h3> {{ msg }} </h3>
+				<form form name="inform" action="" method="post">
+					
+						{% if you %}
+							<table>{{ you }}</table>
+						{% endif %}
+					
+						</br><input type="submit" value="提交">
+				</form>
+			</div>
 		</div>
-		<div class="sub-button">
-			<input type="submit" value="提交">
-		</div>
-	</form>
 	</div>
+</div>
+<!-- footer-top -->
 <!-- footer-top -->
 <div class="footer-top">
 	<div class="container">
 		<div class="col-md-4 foo-left">
 		</div>
 		<div class="col-md-4 foo-left">
-			<h3>今日教室推荐</h3>
-			<h6>大教室</h6>
-			<p>//////</p>
-			<h6>小教室</h6>
-			<p>//////</p>
+			<h3>欢迎使用教室管理系统</h3>
 		</div>
 		<div class="col-md-4 foo-left">
 			<h3>友情链接</h3>
 				<ul>
 					
-					<li><a href="http://jwc.hit.edu.cn">教务处</a></li>
-					<li><a href="http://today.hit.edu.cn">今日哈工大</a></li>
-					<li><a href="/contact/">联系我们</a></li>
-						<div class="clearfix"> </div>		
+					<li><a href="http://jwc.hit.edu.cn">教务处</a></li>	
 				</ul>
 		</div>
-		<div class="clearfix"> </div>
 	</div>
 </div>
 <!-- footer-top -->
 <!-- footer-bottom -->
 	<div class="footer-bottom">
 		<div class="container">
-			<p>Copyright &copy; 2015.Company name All rights reserved.More Templates</p>
+			<p>Copyright &copy; 2015.Company name All rights reserved. </p>
 		</div>
 	</div>
 <!-- footer-bottom -->

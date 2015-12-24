@@ -2,6 +2,9 @@
 <html>
 <head>
 <title>首页</title>
+<link href="/static/css/common/style.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/common/content.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/common/pageTag.css" rel="stylesheet" type="text/css" />
 <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <script src="/static/js/jquery.min.js"></script>
@@ -14,7 +17,7 @@
 				<div class="container">
 					<div class="head-left">
 						<ul class="number">
-							<li><span><i class="phone"> </i>+0123 456 789</span></li>
+							<li><span><i class="phone"> </i>欢迎使用</span></li>
 							<li><a href="mailto:info@example.com"><i class="mail"> </i>hello@address.com</a></li>	
 								<div class="clearfix"> </div>						
 						</ul>
@@ -37,16 +40,11 @@
 			</div>
 			<div class="header-bottom">
 				<div class="container">
-					<div class="logo">
-						<a href="/index/"><img src=""/static/images/logo.png" class="img-responsive" alt=""></a>
-					</div>
 					<div class="head-nav">
 						<span class="menu"> </span>
 							<ul class="cl-effect-3">
-								<li class="active"><a href="/index/">首页</a></li>
-								<li><a href=" /inquire/">教室查询</a></li>
-								<li><a href=" /appointment/">教室预约</a></li>
-								<li><a href=" /contact/">联系我们</a></li>
+								<li class="active"><a href="/admindisplay/">处理预约</a></li>
+								<li><a href=" /task/">自动添加</a></li>
 									<div class="clearfix"> </div>
 									
 							</ul>
@@ -61,28 +59,23 @@
 						<!-- script-for-nav --> 
 					</div>
 					<div class="header-right1">
-						{% if isin%}
-							<li><a href="/updateinform/">{{ name }}</a></li>
-							<li><a href="/changepw/">修改密码</a></li>
-							<li><a href="/logout/">注销</a></li>
-						{% else %}
-							<li><a href="/login/">登录</a></li>
-							<li><a href="/register/">注册</a></li>
-						{% endif %}
+						<li><a href="/updateinform/">管理员</a></li>
+						<li><a href="/changepw/">修改密码</a></li>
+						<li><a href="/logout/">注销</a></li>
 					</div>
 					<div class="clearfix"> </div>
 				</div>
 			</div>
 	</div>
 <!-- header -->
+<div>
 {% if is_super %}
 	{% if theorder %}
-		<div> 
+		<div align="center" class="container"> 
 			<h3>申请详情</h3> 
-			<h4>{{ order }}</h4>
 		</div>
-		<div>
-			<table>
+		<div align="center" style="max-height: 200px;overflow-y: auto;overflow-x: none;">
+			<table width="100%"  cellpadding="0" cellspacing="0" style="border-collapse:collapse" class="bot_line">
 			<th>申请名</th>
 			<th>申请人</th>
 			<th>教室及时间</th>
@@ -113,36 +106,29 @@
 {% else %}
 	<div><h3>您没有管理员权限</h3></div>
 {% endif %}
+</div>
 <!-- footer-top -->
 <div class="footer-top">
 	<div class="container">
 		<div class="col-md-4 foo-left">
 		</div>
 		<div class="col-md-4 foo-left">
-			<h3>今日教室推荐</h3>
-			<h6>大教室</h6>
-			<p>//////</p>
-			<h6>小教室</h6>
-			<p>//////</p>
+			<h3>欢迎使用教室管理系统</h3>
 		</div>
 		<div class="col-md-4 foo-left">
 			<h3>友情链接</h3>
 				<ul>
 					
-					<li><a href="http://jwc.hit.edu.cn">教务处</a></li>
-					<li><a href="http://today.hit.edu.cn">今日哈工大</a></li>
-					<li><a href="/contact/">联系我们</a></li>
-						<div class="clearfix"> </div>		
+					<li><a href="http://jwc.hit.edu.cn">教务处</a></li>	
 				</ul>
 		</div>
-		<div class="clearfix"> </div>
 	</div>
 </div>
 <!-- footer-top -->
 <!-- footer-bottom -->
 	<div class="footer-bottom">
 		<div class="container">
-			<p>Copyright &copy; 2015.Company name All rights reserved.More Templates </p>
+			<p>Copyright &copy; 2015.Company name All rights reserved. </p>
 		</div>
 	</div>
 <!-- footer-bottom -->

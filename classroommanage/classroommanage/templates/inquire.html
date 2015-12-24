@@ -2,11 +2,14 @@
 <html>
 <head>
 <title>查询教室</title>
+<link href="/static/css/common/style.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/common/content.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/common/pageTag.css" rel="stylesheet" type="text/css" />
 <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <script src="/static/js/jquery.min.js"></script>
 <script language="javascript" type="text/javascript" src="/static/js/My97DatePicker/WdatePicker.js"></script>
-<link rel="stylesheet" href="/static/css/flexslider.css" type="text/css" media="screen" />		
+<link rel="stylesheet" href="/static/css/flexslider.css" type="text/css" media="screen" />	
 </head>
 <body>
 <!-- header -->
@@ -15,7 +18,7 @@
 				<div class="container">
 					<div class="head-left">
 						<ul class="number">
-							<li><span><i class="phone"> </i>+0123 456 789</span></li>
+							<li><span><i class="phone"> </i>欢迎使用</span></li>
 							<li><a href="mailto:info@example.com"><i class="mail"> </i>hello@address.com</a></li>	
 								<div class="clearfix"> </div>						
 						</ul>
@@ -74,74 +77,142 @@
 			</div>
 	</div>
 <!-- header --> 
+<div align="center" class="container">
 <form name="search" action="" method="post">
-<div>
-	<script language="javascript" type="text/javascript" src="/static/js/My97DatePicker/WdatePicker.js"></script>
 	<label for="id_day">日期:</label><input class="Wdate" type="text" name="day" id="id_day" onClick="WdatePicker()"/>
 	<label for="id_period">节次</label>{{ inqure.period }}
-	<label for="id_campus">校区</label>{{ inqure.campus }}
-	<label for="id_building">教学楼</label>{{ inqure.building }}
-	<input type="submit" value="搜索" />
+	<label for="id_campus">校区</label><select id="id_campus" name="campus">
+							<option value="0">全部</option>
+							<option value="1">一校区</option>  
+							<option value="2">二校区</option>  
+						</select>
+	<label for="id_building">教学楼</label><select id="id_building" name="building">  
+							<option value="0">正心楼</option>  
+							<option value="1">诚意楼</option>  
+							<option value="2">格物楼</option>  
+							<option value="3">致知楼</option>  
+							<option value="4">电机楼</option>  
+							<option value="5">机械楼</option>  
+							<option value="6">主楼</option>  
+							<option value="7">东配楼</option>  
+							<option value="8">西配楼</option>  
+							<option value="9">青年公寓</option> 
+							<option value="10">全部</option>
+						</select>
+	<input type="submit" id="id_new" value="搜索" />
 
-</div>
 </form>
-<script type="text/javascript" src="/static/js/jquery.js"></script>
 <script>
     $(document).ready(function(){
-      $("#id_campus").click(function(){
-        var n = $("#id_campus").val()
-		$.get("/bui/",{'num', n}, function(ret){
-			$("#id_building").html(ret);
-		});
-	  })
+		  $("#id_campus").click(function(){
+			var campus = $("#id_campus").val();
+			$.get("/buil/",{'n':campus}, function(ret){
+				$("#id_building").html(ret);
+			})
+		 });
+		 
     });
 </script>
-
-{% if rooms %}
-	<table boder=1>
-		{% for room in rooms %}
-			<tr> <a href="/appointment/?q={{ room.id }}"> {{ room.name }} </a> </tr>
-			<tr> {{ room.building }} </tr>
-			<tr> <a href="/appointment/?q={{ room.id }}"> 预约 </a> </tr>
-			</br>
-		{% endfor %}
-	</table>
-{% else %}
+	{% if rooms %}
+		<h4>空闲教室如下</h4>
+	<div style="max-height: 400px;overflow-y: auto;overflow-x: none;">
+		<table width="100%"  cellpadding="0" cellspacing="0" style="border-collapse:collapse" class="bot_line">
+			<th>教室</th>
+			<th>教学楼</th>
+			<th>操作</th>
+			{% for room in rooms %}
+				<tr> 
+				<td><a href="/appointment/?q={{ room.id }} {{ datetime }}"> {{ room.name }} </a> </td>
+				<td> {{ room.building }} </td>
+				<td> <a href="/appointment/?q={{ room.id }} {{ datetime }}"> 预约 </a> </td>
+				</tr>
+			{% endfor %}
+	{% else %}
+		<h4>{{ msg }}</h4>
+	{% endif %}
+		</table>
+	</div>
+	</br></br></br>
+	<div align="center">
+		<form name="find" action="" method="post">
+			<!-- <label for="id_days">日期:</label><input class="Wdate" type="text" name="days" id="id_days" onClick="WdatePicker()"/>
+			<label for="id_dayo">——</label><input class="Wdate" type="text" name="dayo" id="id_dayo" onClick="WdatePicker()"/> -->
+			<label for="id_mroom">教室:</label><input type="text" name="mroom" id="id_mroom"/>
+			<input type="submit" id="id_2" value="查询" />
+		</form>
+	</div>
+	<div align="center" >
+	{% if tabs %}
+		<h4>查询结果如下</h4>
+			<div style="position:relative; top:20px; max-height: 400px;overflow-y: auto;overflow-x: none;">
+            <table width="100%"  cellpadding="0" cellspacing="0" style="border-collapse:collapse;" class="dataTable">
+               <tr>
+                  <th width="10">　</th>
+				  {% for day in days %}
+                  <th colspan="5" style="text-align:center">{{ day }}</th>
+				  {% endfor %}
+                </tr>
+                
+               <tr> 
+                    <th style="white-space:nowrap; ">教室</th>
+				  {% for day in days %}
+					 <th style="white-space:nowrap; "> 1,2 </th>
+					 <th style="white-space:nowrap; "> 3,4 </th>
+					 <th style="white-space:nowrap; "> 5,6 </th>
+					 <th style="white-space:nowrap; "> 7,8 </th>
+					 <th style="white-space:nowrap; "> 9,10 </th>
+				  {% endfor %}
+			   </tr>
+			   <div class="list" style="overflow:auto"> 
+			   {% for tabr in tabs %}
+			   <tr>
+					{% for tabd in tabr %}
+						{% if forloop.first %}
+							<th style="white-space:newrap;">{{ tabd }}</th>
+						{% else %}
+							{% if tabd %}
+								<th style="white-space:nowrap; ">占用</th>
+							{% else %}
+								<th style="white-space:nowrap; ">空闲</th>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>
+			   {% endfor %}
+			   </div>
+	{% else %}
 	<h4>{{ msg }}</h4>
-{% endif %}
+	{% endif %}
+	</div>
+	</div>
+</div>
 
 <!-- footer-top -->
-<div class="footer-top">
+<div style="position: relative; top: 600px">
+<div class="footer-top" >
 	<div class="container">
 		<div class="col-md-4 foo-left">
 		</div>
 		<div class="col-md-4 foo-left">
-			<h3>今日教室推荐</h3>
-			<h6>大教室</h6>
-			<p>//////</p>
-			<h6>小教室</h6>
-			<p>//////</p>
+			<h3>欢迎使用教室管理系统</h3>
 		</div>
 		<div class="col-md-4 foo-left">
 			<h3>友情链接</h3>
 				<ul>
 					
-					<li><a href="http://jwc.hit.edu.cn">教务处</a></li>
-					<li><a href="http://today.hit.edu.cn">今日哈工大</a></li>
-					<li><a href="/contact/">联系我们</a></li>
-						<div class="clearfix"> </div>		
+					<li><a href="http://jwc.hit.edu.cn">教务处</a></li>	
 				</ul>
 		</div>
-		<div class="clearfix"> </div>
 	</div>
 </div>
 <!-- footer-top -->
 <!-- footer-bottom -->
 	<div class="footer-bottom">
 		<div class="container">
-			<p>Copyright &copy; 2015.Company name All rights reserved.More Templates</p>
+			<p>Copyright &copy; 2015.Company name All rights reserved. </p>
 		</div>
 	</div>
+</div>
 <!-- footer-bottom -->
 </body>
 </html>

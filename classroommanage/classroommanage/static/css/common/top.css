@@ -1,0 +1,161 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+.top{ width:100%; height:51px; margin:0px auto; background: url(../../images/common/topbg.jpg) repeat-x bottom left; }
+.logo{ height:50px; float:left; width:100%; background: url(../../images/school/logo_02.jpg) no-repeat bottom left; }
+.welcome{ float:right; padding-right:11px; line-height:48px; color:#d2e6fb; font-size:12px; _width:160px;}
+.logo_sec{ width:334px;  height:33px; float:left} 
+ .top_right{height:50px;  float:right; width:400px;   }
+ 
+/*图标*/
+#taskbar_right {FLOAT: right; width:265px; padding-top:2px;padding-left:10px;  margin-right:10px;height:48px; }
+#taskbar_right a{DISPLAY: inline-block; margin-right:13px;_margin-right:10px;WIDTH: 30px;HEIGHT: 14px; float:left; padding-top:30px;  text-align:center; color:#d2e6fb; }
+#taskbar_right a:hover{color:#ffffff}
+#taskbar_right #person_info { BACKGROUND: url(../../images/common/desktop_icons.png) no-repeat -2px -3px;
+_BACKGROUND: url(../../images/common/desktop_icons.png) no-repeat -2px -3px; }
+#taskbar_right #person_info:hover {BACKGROUND-POSITION: -2px -103px;}
+
+#taskbar_right #role { BACKGROUND: url(../../images/common/desktop_icons.png) no-repeat -453px -3px;
+_BACKGROUND: url(../../images/common/desktop_icons.png) no-repeat -453px -3px; }
+#taskbar_right #role:hover {BACKGROUND-POSITION: -453px -103px;}
+
+#taskbar_right #person_info2 {
+ BACKGROUND: url(../../images/common/desktop_icons.png) no-repeat -564px -3px;
+_BACKGROUND: url(../../images/common/desktop_icons.png) no-repeat -564px -3px; }
+#taskbar_right #person_info2:hover {BACKGROUND-POSITION: -564px -103px} 
+
+#taskbar_right #shortcut {
+BACKGROUND: url(../../images/common/desktop_icons.png) no-repeat -113px -3px;
+_BACKGROUND: url(../../images/common/desktop_icons.png) no-repeat -113px -3px; }
+#taskbar_right #shortcut:hover {BACKGROUND-POSITION: -113px -103px}
+
+#taskbar_right #logout {
+BACKGROUND: url(../../images/common/desktop_icons.png) no-repeat -684px -3px;
+_BACKGROUND: url(../../images/common/desktop_icons.png) no-repeat -684px -3px;}
+#taskbar_right #logout:hover {BACKGROUND-POSITION: -684px -103px}
+ 
+#taskbar_right #person {
+BACKGROUND: url(../../images/common/desktop_icons.png) no-repeat -334px -3px;
+_BACKGROUND: url(../../images/common/desktop_icons.png) no-repeat -334px -3px;   }
+#taskbar_right #person:hover {BACKGROUND-POSITION: -334px -103px}
+ 
+#menubar_right {FLOAT: right; width:40px; height:24px;  }
+#menubar_right a{DISPLAY: inline-block; margin-right:10px;WIDTH: 30px;HEIGHT: 24px; float:left;  }
+#menubar_right #hide_topbar {
+BACKGROUND: url(../../images/common/desktop_icons.png) no-repeat -175px -5px;
+_BACKGROUND: url(../../images/common/desktop_icons.png) no-repeat -175px -5px;   }
+#menubar_right #hide_topbar:hover {BACKGROUND-POSITION: -175px -106px}
+ 
+#menubar_right .up#hide_topbar {
+BACKGROUND: url(../../images/common/desktop_icons.png) no-repeat -243px -5px;
+_BACKGROUND: url(../../images/common/desktop_icons.png) no-repeat -243px -5px}
+#menubar_right .up#hide_topbar:hover {BACKGROUND-POSITION: -243px -106px}
+/*切换用户01*/
+#site-nav {Z-INDEX: 10; COLOR: #444444;   POSITION: relative; width:43px;   float:left} 
+.photo{ width:40px; height:30px; float:right;   position:relative; }
+#site-nav .switch-bd {  DISPLAY: none; Z-INDEX: 10001; width:160px;  min-height:40px; height:auto; _height:40px; border:1px solid 
+#313340; position:absolute; background-color:#f1f5fe;  top:30px; left:-130px;  box-shadow:1px 2px 2px #cccccc ; border-radius:5px; padding-bottom:5px}
+.switch_arrow{ width:15px; height:5px; position:absolute; top:-5px; right:10px; background:url(../../images/common/switch.png) no-repeat -10px -42px;}
+#site-nav .switch {POSITION: relative; float:left}
+#site-nav .switch:hover .switch-bd {DISPLAY: block}
+#site-nav .hover .switch-bd {DISPLAY: block} 
+.switch-bd ul { padding:5px 15px; float:left}
+.switch-bd ul li{ height:30px; line-height:30px; float:left; width:130px; border-bottom:1px solid #b8bec7; font-size:15px; text-align:left; cursor:pointer} 
+.switch-bd ul li:hover{ background-color:#eef1d7}
+.switch-bd span{ width:16px; height:16px; display:block; background:url(../../images/common/switch.png) no-repeat -85px -6px; float:right; margin-top:5px}
+
+
+
+/*main01横排导航*/
+#menu {background:#e2e6ec; height:36px; width:100%;  margin:0 auto}
+ul#nav{padding-left:20px; padding-top:2px}
+#nav li{float:left;height:34px; line-height:34px;float:left}
+#nav li.line{ width:2px; float:left; background:url(../../images/common/index_11.gif)  no-repeat center; margin-left:5px; margin-right:5px}
+#nav li a{float:left;display:block;padding-left:12px; height:34px;cursor:pointer;text-decoration:none;  }
+#nav li a span{ padding-right:12px; height:34px; line-height:34px;display:inline-block;}
+#nav li a:hover{ background:url(../../images/common/switch.png) no-repeat 0 -123px; color:#FFFFFF} 
+#nav li a:hover span{ background:url(../../images/common/switch.png) no-repeat right -155px} 
+
+#nav li.current a{float:left;display:block;padding-left:10px; height:34px;cursor:pointer;text-decoration:none;background:url(../../images/common/switch.png) no-repeat 0 -123px; color:#FFFFFF  }
+#nav li.current a span{ padding-right:10px; height:34px; width:auto; line-height:34px;display:inline-block;background:url(../../images/common/switch.png) no-repeat right -155px}
+ 
+/*main03横排导航带二竖列级菜单*/ 
+#nav05 {margin:2px auto 0px; display:block; float:left; padding-left:15px} 
+#nav05 .mainlevel { float:left;  width:140px}
+#nav05 .mainlevel a {color:#000; text-decoration:none; line-height:34px; display:block; padding:0 20px; width:100px; text-align:center}
+#nav05 .mainlevel a.hover{color:#fff; text-decoration:none; background:#535665 ;border-top-left-radius:5px;border-top-right-radius:5px;}
+#nav05 .mainlevel a:hover {color:#fff; text-decoration:none; background:#494b56 ;border-top-left-radius:5px;border-top-right-radius:5px;}
+#nav05 .mainlevel ul {display:none; position:absolute; }
+#nav05 .mainlevel li {  background:#3a3c48; width:140px;border-bottom:1px dotted #6f7079 }  
+#nav05 .line{width:2px; height:34px; background: url(../../images/common/index_11.gif) no-repeat center; float:left}  
+#nav05 .mainlevel li a{color:#c4dcee;}
+
+/*main04点击展开二级菜单可滚动*/  
+.top-nav{width:100%;margin:0 auto; height:24px; position:relative; background: url(../../images/common/menubg.jpg) repeat-x left; }
+.top-nav .navlist-wrap{width:100%;margin:0 auto;position:relative; height:24px; overflow:hidden}
+.top-nav .navlist{position:relative;left:0PX;top:0PX; padding:0px; font-size:13px; height:24px; width:100%}
+.top-nav .navlist .nav-btn{ display:inline-block; padding-left:14px;margin-left:0px;color:#FFFFFF;
+vertical-align:middle;text-decoration:none; height:24px; line-height:24px; position:relative;font-size:12px; }
+.top-nav .navlist .nav-btn span{padding-right:23px;  height:24px ;display: inline-block  } 
+	
+.navlist .nav-btn div{background:url(../../images/common/broswer_home.png) no-repeat -32px -145px; width:8px;height:16px;
+vertical-align:middle;*height:12px;*vertical-align:middle;*cursor:pointer;*letter-spacing:0;*margin-left:0;*background-position:-32px -145px; position:absolute;top:7px; right:8px    }
+ 
+
+.navlist .btn-active{ background:url(../../images/common/switch.png) no-repeat -2px -124px; _background:url(../../images/common/menubg.gif) no-repeat -2px 0px;display: inline-block } 
+.navlist .btn-active span{padding-right:25px; background:url(../../images/common/switch.png) no-repeat right -156px; _background:url(../../images/common/menubg.gif) no-repeat right -32px;color:#c2e8f2; height:24px ;display: inline-block  } 
+.navlist .btn-active div{background:url(../../images/common/broswer_home.png) no-repeat -12px -145px;right:10px;  }
+
+.top-nav .expand{display:none;  background-color:#1f364b; overflow:hidden; position:absolute;width:100%; top:24px; z-index:1; }
+.expand .close-btn{
+	BACKGROUND: url(../../images/common/desktop_icons.png) no-repeat -175px -5px;
+    _BACKGROUND: url(../../images/common/desktop_icons.png) no-repeat -175px -5px; 
+    cursor: pointer;
+    height: 20px;
+    margin-right: 10px;
+    position: absolute;
+    right: 0;
+    top: 2px;
+    width: 30px;
+}
+.expand .close-btn:hover{BACKGROUND: url(../../images/common/desktop_icons.png) no-repeat -175px -106px;}
+.expand .download{width:2000%;min-height:21px; height:auto; _height:21px;float:left;}
+.expand .download .item{float:left;width:5%}
+.expand .download .item-active{display:block} 
+ 
+.download .download-list{ padding-top:5px;padding-right:45px}
+.download .download-list .btn{display:inline-block;text-decoration:none;color:#c2e8f2;font-size:12px;line-height:16px;margin:0px 8px 2px;cursor:pointer}
+.download .download-list .btn:hover{color:#ffffff}
+
+.download-list .btn .icon{background-repeat:no-repeat;background-image:url(../../images/common/broswer_home.png);height:16px;width:16px;float:left}
+.download-list .btn .text{float:left;padding:0px 0px 0px 2px}
+
+.download-list .zj .icon{background-position:-11px -6px}
+.download .download-list .zj:hover .icon{background-position:-11px -27px}
+
+.download .download-list .sjgj .icon{background-position:-30px -6px}
+.download .download-list .sjgj:hover .icon{background-position:-30px -27px}
+
+.download-list .wdj .icon{background-position:-50px -6px}
+.download-list .wdj:hover .icon{background-position:-50px -27px}
+
+.download-list .jy .icon{background-position:-74px -6px}
+.download-list .jy:hover .icon{background-position:-74px -27px}
+
+.download-list .apple .icon{background-position:-117px -6px;}
+.download-list .apple:hover .icon{background-position:-117px -27px}
+
+.download-list .itools .icon{background-position:-97px -6px}
+.download-list .itools:hover .icon{background-position:-97px -27px}
+
+/*菜单超出宽度显示箭头*/  
+#taskbar_center{FLOAT:left; }
+#taskbar_center #tabs_left_scroll{WIDTH: 30px; DISPLAY: none; FLOAT: left; HEIGHT: 24px; CURSOR: pointer;}
+#taskbar_center #tabs_right_scroll{WIDTH: 30px; DISPLAY: none; FLOAT: right; HEIGHT: 24px; CURSOR: pointer; } 
+#taskbar_center #tabs_left_scroll{background:url(../../images/common/tabs_arrow.png) no-repeat 0px center;}
+#taskbar_center #tabs_left_scroll.active{background:url(../../images/common/tabs_arrow.png) no-repeat -60px 1px;}
+#taskbar_center #tabs_right_scroll{background:url(../../images/common/tabs_arrow.png) no-repeat -30px center;}
+#taskbar_center #tabs_right_scroll.active{background:url(../../images/common/tabs_arrow.png) no-repeat -90px 1px;}
+
+#taskbar_center #tabs_container{WIDTH: 100%; WHITE-SPACE: nowrap; FLOAT: left; HEIGHT: 24px; OVERFLOW: hidden; position:relative;}
+

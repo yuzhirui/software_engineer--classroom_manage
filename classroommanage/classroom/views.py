@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from django.core.mail import send_mail
+from django.contrib.auth.models import User
 from django.contrib import auth
 #from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm
@@ -14,6 +15,7 @@ import time
 import datetime
 from classroommanage import globalty
 import json
+import random
 
 # home page
 def home(request):
@@ -35,7 +37,7 @@ def login(request):
         if user.is_staff:
             return render_to_response("admin.html")
     # Redirect to a success page.
-        return render_to_response("index.html")
+        return HttpResponseRedirect("/index")
     else:
     # Show an error page
         return render_to_response("login.html")
@@ -50,9 +52,22 @@ def admindisplay(request):
             orders = None
         if request.POST:
             if request.POST.get('y'):
-                Order.objects.get(id = request.POST.get('y')).autodeal(True)
+                tho = Order.objects.get(id = request.POST.get('y'))
+                tho.autodeal(True)
+                subject = u'管理员同意了您的预约'
+                mail = tho.user.email
+                message = tho.user.username + u'您好！管理员已经批准了您的预约。您可以登录网站查看。\
+                预约内容为' + tho.output() + u'使用时间为' + tho.datetime.output()
+                
             else:
-                Order.objects.get(id = request.POST.get('n')).autodeal(False)
+                tho = Order.objects.get(id = request.POST.get('n'))
+                tho.autodeal(False)
+                subject = u'管理员拒绝了您的预约'
+                mail = tho.user.email
+                message = tho.user.username + u'您好！很抱歉，管理员拒绝了您的预约。\
+                预约内容为' + tho.output() + u'使用时间为' + tho.datetime.output()
+                
+            send_mail(subject, message, '18994855609@163.com', [mail], fail_silently=False)
         return render_to_response("admindisplay.html", {'is_super': is_super, \
         'orders': orders, 'name': u'管理员', 'isin': True})
     else:
@@ -86,12 +101,14 @@ def order_room(request):
             orders = Order.objects.filter(user__username__exact = name, is_dealed = False)
         except:
             orders = None
-        orderforms = []
-        if orders:
-            for order in orders:
-                orderforms.append(OrderForm(instance = order))
+        if request.POST:
+            oid = request.POST['d']
+            Order.objects.get(id = oid).delete()
+            subject = request.user.username + u'取消预约'
+            message = u'用户取消了该预约申请。'
+            send_mail(subject, message, '18994855609@163.com', ['2927379969@qq.com'], fail_silently=True)
         lst = Useroom.objects.filter(user__username__exact = name)
-        return render_to_response("yourcenter.html", {'name': name, 'orderforms': orderforms, \
+        return render_to_response("yourcenter.html", {'name': name, 'orders': orders, \
         'roomforms': lst, 'isin': isin})
     return render_to_response("yourcenter.html", {'name': u'登录', 'orderforms':None, \
     'roomforms': None, 'msg': u'请登录进入个人中心', 'isin': isin})
@@ -197,25 +214,55 @@ def inquire(request):
         name = request.user.username
     else:
         name = u'登录'
-
-    ainqure = InqureForm( initial={'day': time.strftime('%Y-%m-%d',time.localtime(time.time()))} )
     if request.POST:
         ainqure = InqureForm(request.POST)
+        try:
+            rooname = request.POST['mroom']            
+            roos = Room.objects.filter(name__icontains = rooname)
+        except:
+            roos = []
+        if roos:
+            days = []
+            for i in range(7):
+                d1 = datetime.datetime.now()
+                d2 = d1 + datetime.timedelta(days = i)
+                day = str(d2).split()[0]
+                days.append(day)
+            tabs = []
+            n = len(roos)
+            for i in range(n):
+                tabs.append([])
+                tabs[i].append(roos[i])
+                for j in range(7):
+                    for k in range(5):
+                        datet = Datetime.objects.get(date = days[j], period = k)
+                        user = Useroom.objects.get(datetime = datet, room = roos[i]).user
+                        tabs[i].append(user)
+        else:
+            tabs = None
+            days = None
         if ainqure.is_valid():
             rooms = None
             rooms = Useroom.inqureresults(ainqure)
+            dat = ainqure['day'].value()
+            peri = ainqure['period'].value()
+            datetim = Datetime.objects.get(date = dat, period = peri).id
             return render_to_response('inquire.html',
                     {
                         'name': name,
                         'rooms': rooms,
                         'inqure': ainqure,
                         'isin': isin,
+                        'datetime': datetim,
+                        'tabs': tabs,
+                        'days': days,
                     })
         else:
-            ainqure = InqureForm( initial={'day': time.strftime('%Y-%m-%d',time.localtime(time.time()))} )
-            return render_to_response('inquire.html', {'name': name, 'inqure': ainqure, 'isin': isin, 'msg': u"查询无结果"})
+            ainqure = InqureForm(request.POST)
+            return render_to_response('inquire.html', {'name': name, 'inqure': ainqure, 'isin': isin,\
+            'msg': u"查询无结果", 'tabs': tabs, 'days': days})
     else:
-        ainqure = InqureForm( initial={'day': time.strftime('%Y-%m-%d',time.localtime(time.time()))} )
+        ainqure = InqureForm()
         return render_to_response("inquire.html", {'name': name, 'inqure': ainqure, 'isin': isin})
 
 #A user order rooms of a certain time
@@ -226,29 +273,52 @@ def appointment(request):
         name = request.user.username
         neworder = Order(user= request.user)
         try:
-            roomid = request.GET['q']
-            if roomid:
-                order = OrderForm(initial = {'room': roomid, })
+            two = request.GET['q'].split()
+            roomid = int(two[0])
+            did = int(two[1])
+            neworder.datetime = Datetime.objects.get(id=did)
+            theroom = Room.objects.get(id=roomid)
         except:
-            order = OrderForm(instance = neworder)
+            theroom = None
         if request.POST:
-            order = OrderForm(request.POST, instance = neworder)
-            if order.is_valid():
-                order.save()
+            if not theroom:
+                 return render_to_response('appointment.html', {'name': name, \
+                'msg': u'您尚未选择任何教室，请先查询再预约', 'isin': isin})
+            message = request.POST['message']
+            if len(message) > 10:
+                neworder.message = message
+                neworder.save()
+                neworder.room.add(theroom)
                 subject = request.user.username + u'用户预约教室'
-                message = request.POST['message']
                 send_mail(subject, message, '18994855609@163.com', ['2927379969@qq.com'], fail_silently=True)
                 return render_to_response('appointment.html', {'name': name, \
-                'msg': u'提交申请成功', 'order': order, 'isin': isin})
+                'msg': u'提交申请成功', 'isin': isin})
             else:
                 return render_to_response('appointment.html', {'name': name, \
-                'msg': u'提交申请失败，请检查输入是否合法', 'order': order, 'isin': isin})
-        return render_to_response('appointment.html', {'name': name, \
-                'isin': isin, 'order': order, })
+                'msg': u'提交申请失败，简述字数不应少于10个字', 'isin': isin})
+        return render_to_response('appointment.html', {'name': name, 'isin': isin })
             
     else:
         return render_to_response("appointment.html", {'name': u'登录', \
         'msg': u'您尚未登录，请登录后预约教室', 'isin': isin})
+
+def forget(request):
+    msg = ''
+    if request.POST:
+        name = request.POST['username']
+        mail = request.POST['email']
+        msg = u'修改密码成功，请查收邮件获取新密码！'
+        try:
+            user = User.objects.get(username = name, email = mail)
+            new = str(random.randint(100000, 999999))
+            user.set_password(new)
+            user.save()
+            subject = name + u'重置密码'
+            message = u'新密码为:'+ new + u'，请登录后尽快修改密码!'
+            send_mail(subject, message, '18994855609@163.com', [mail], fail_silently=True)
+        except:
+            msg = u'输入信息有误，请重试！'
+    return render_to_response("forget.html", {'msg': msg})
 
 def task(request):
     try:
@@ -289,6 +359,25 @@ def bui(request):
         <option value="8">西配楼</option>  <option value="9">青年公寓</option>'
     return HttpResponse(json.dumps(build), content_type='application/json')
 
+def buil(request):
+    n = int(request.GET['n'])
+    build = u'<option value="0">正心楼</option>  <option value="1">诚意楼</option> \
+        <option value="2">格物楼</option>  <option value="3">致知楼</option>  \
+        <option value="4">电机楼</option>  <option value="5">机械楼</option> \
+        <option value="6">主楼</option>  <option value="7">东配楼</option>\
+        <option value="8">西配楼</option>  <option value="9">青年公寓</option>\
+        <option value="10">全部</option>'
+    if n == 1:
+        build = u'<option value="0">正心楼</option>  <option value="1">诚意楼</option> \
+        <option value="2">格物楼</option>  <option value="3">致知楼</option>  \
+        <option value="4">电机楼</option>  <option value="5">机械楼</option>\
+        <option value="10">全部</option>'
+    elif n == 2:
+        build = u'<option value="6">主楼</option>  <option value="7">东配楼</option>\
+        <option value="8">西配楼</option>  <option value="9">青年公寓</option>\
+        <option value="10">全部</option>'
+    return HttpResponse(json.dumps(build), content_type='application/json')
+
 def flo(request):
     n = int(request.GET['build'])
     floors = ''
@@ -311,7 +400,7 @@ def flo(request):
         floors = u'<option value="0">一楼</option> <option value="1">二楼</option> \
         <option value="2">三楼</option> <option value="3">四楼</option>'
     return HttpResponse(json.dumps(floors), content_type='application/json')
-        
+ 
     
 def inq(request):
     build = int(request.GET['build'])

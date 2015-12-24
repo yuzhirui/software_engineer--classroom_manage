@@ -677,6 +677,8 @@ font-size:1em;
 font-style:italic;
 }
 .footer-top {
+  position: relative;
+  top: 300px;
   background: #222222;
   padding: 1em 0;
 }
@@ -717,6 +719,8 @@ font-style:italic;
   color: #42E4d8;
 }
 .footer-bottom {
+  position: relative;
+  top: 300px;
   background: #131313;
   padding: 1em 0;
 }
