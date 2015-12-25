@@ -19,3 +19,5 @@ the project of software engineer, use Django1.7
 15、增加了另一种查询方式
 16、增加了忘记密码之后通过邮件重置密码的功能
 17、多增加了一些教室数据，便于测试
+
+18、修改了一个小bug

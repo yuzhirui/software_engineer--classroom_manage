@@ -240,17 +240,20 @@
 					var period = $("#id_period").val();
 					if (rooms){
 						var message = window.prompt("预约简述", "");
+						if (message.length >= 10){
+								$.get("/submit/",{'rooms':rooms,'day':day,'period':period,'message':message}, function(ret){
+								if (ret){
+									window.alert("预约提交成功！");				
+								}else{
+									window.alert("预约提交失败！");
+								}
+							})
+						}else{
+							window.alert("不应少于10个字！");
+						}
 					}else{
 						window.alert("您未选中任何教室！");
 					}
-					
-					$.get("/submit/",{'rooms':rooms,'day':day,'period':period,'message':message}, function(ret){
-						if (ret){
-							window.alert("预约提交成功！")						
-						}else{
-							window.alert("预约提交失败！")
-						}
-					})
 				});
 
             });
